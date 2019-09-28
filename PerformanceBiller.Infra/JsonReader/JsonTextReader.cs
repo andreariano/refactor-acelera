@@ -1,5 +1,4 @@
-﻿using PerformanceBiller.Infra;
-using PerformanceBiller.Models;
+﻿using PerformanceBiller.Models;
 
 namespace PerformanceBiller.Infra.JsonReader
 {

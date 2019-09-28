@@ -1,9 +1,7 @@
 ﻿namespace PerformanceBiller.Models
 {
-    public class Play
+    public abstract class Play
     {
-        public string Name { get; set; }
-
-        public PlayType Type { get; set; }
+        public abstract string Name { get; }
     }
 }

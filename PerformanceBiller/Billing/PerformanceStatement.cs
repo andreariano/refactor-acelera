@@ -15,8 +15,9 @@ namespace PerformanceBiller.Billing
         {
             var invoice = _invoiceRepository.GetInvoice();
 
-
-            
+            invoice
+                .CalculatePerformancesTotal()
+                .CalculateVolumeCredits();
         }
     }
 }

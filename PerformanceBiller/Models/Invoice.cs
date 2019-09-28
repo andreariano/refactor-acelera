@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 
 namespace PerformanceBiller.Models
 {
@@ -6,6 +6,24 @@ namespace PerformanceBiller.Models
     {
         public Customer Customer { get; set; }
 
-        public IList<Performance> Performances { get; set; }
+        public PerformanceCollection Performances { get; set; }
+
+        public decimal PerformancesTotal { get; private set; }
+
+        public decimal VolumeCreditsTotal { get; private set; }
+
+        public Invoice CalculatePerformancesTotal()
+        {
+            PerformancesTotal = Performances.Sum(x => x.CalculatePerformace());
+
+            return this;
+        }
+
+        public Invoice CalculateVolumeCredits()
+        {
+            VolumeCreditsTotal = Performances.Sum(x => x.CalculateVolumeCredits());
+
+            return this;
+        }
     }
 }
