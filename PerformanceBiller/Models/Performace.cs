@@ -12,11 +12,13 @@ namespace PerformanceBiller.Models
 
         protected abstract int AudienceThreshold { get; }
 
-        public T Play { get; private set; }
+        public IPlay Play { get; private set; }
 
         public int Audience { get; private set; }
 
-        protected Performace(T play, int audience)
+        public decimal PerformaceTotal { get; private set; }
+
+        protected Performace(IPlay play, int audience)
         {
             Play = play;
             Audience = audience;
@@ -30,13 +32,15 @@ namespace PerformanceBiller.Models
 
         public decimal CalculatePerformace()
         {
-            return
+            PerformaceTotal = 
                 (FixedMinimumPrice +
                 PriceAboveAudienceThreshold() + 
                 CalculatePerformaceSpecific()) / 100;
+
+            return PerformaceTotal;
         }
 
-        public virtual int CalculateVolumeCredits()
+        public int CalculateVolumeCredits()
         {
             return 
                 Math.Max(Audience - AudienceThresholdForVolumeCredit, 0) + 

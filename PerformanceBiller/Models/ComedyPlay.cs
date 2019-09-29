@@ -2,6 +2,11 @@
 {
     public class ComedyPlay : IPlay
     {
-        public string Name { get => "Comedy"; }
+        public ComedyPlay(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; }
     }
 }

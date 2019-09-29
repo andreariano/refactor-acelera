@@ -15,14 +15,17 @@ namespace PerformanceBiller.Billing
             _invoiceReporter = invoiceReporter;
         }
 
+        public IInvoiceReporter InvoiceReporter { get => _invoiceReporter; }
+
         public void CalculateInvoice()
         {
-            var invoice = new Invoice();
+            var invoice = new Invoice(_invoiceRepository, _invoiceReporter);
 
             invoice
-                .FecthPerformancesDataFrom(_invoiceRepository)
+                .FecthPerformancesData()
                 .CalculatePerformancesTotal()
-                .CalculateVolumeCredits();
+                .CalculateVolumeCredits()
+                .GenerateInvoiceReport();
         }
     }
 }

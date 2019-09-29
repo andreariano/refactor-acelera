@@ -6,15 +6,25 @@ namespace PerformanceBiller.Models
 {
     public class Invoice
     {
+        private readonly IInvoiceRepository _invoiceRepository;
+
+        private readonly IInvoiceReporter _invoiceReporter;
+
         public InvoiceData InvoiceData { get; private set; }
 
-        internal decimal PerformancesTotal { get; private set; }
+        public decimal PerformancesTotal { get; private set; }
 
-        internal decimal VolumeCreditsTotal { get; private set; }
+        public decimal VolumeCreditsTotal { get; private set; }
 
-        public Invoice FecthPerformancesDataFrom(IInvoiceRepository invoiceRepository)
+        public Invoice(IInvoiceRepository invoiceRepository, IInvoiceReporter invoiceReporter)
         {
-            InvoiceData = invoiceRepository.GetInvoiceData();
+            this._invoiceRepository = invoiceRepository;
+            this._invoiceReporter = invoiceReporter;
+        }
+
+        public Invoice FecthPerformancesData()
+        {
+            InvoiceData = _invoiceRepository.GetInvoiceData();
 
             return this;
         }
@@ -33,9 +43,11 @@ namespace PerformanceBiller.Models
             return this;
         }
 
-        public Invoice GenerateInvoiceReportWith(IInvoiceReporter invoiceReporter)
+        public IInvoiceReporter GenerateInvoiceReport()
         {
-            return this;
+            _invoiceReporter.GenerateReportFor(this);
+
+            return _invoiceReporter;
         }
     }
 }

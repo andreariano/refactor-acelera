@@ -14,7 +14,6 @@
 
         protected override int AudienceThreshold => 20;
 
-
         public ComedyPerformance(ComedyPlay play, int audience) : base(play, audience)
         {
         }

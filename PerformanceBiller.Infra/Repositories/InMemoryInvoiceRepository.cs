@@ -7,9 +7,9 @@ namespace PerformanceBiller.Infra.Repositories
     {
         public InvoiceData GetInvoiceData()
         {
-            var hamletPlay = new TragedyPlay();
-            var asLikePlay = new ComedyPlay();
-            var othelloPlay = new TragedyPlay();
+            var hamletPlay = new TragedyPlay("Hamlet");
+            var asLikePlay = new ComedyPlay("As You Like It");
+            var othelloPlay = new TragedyPlay("Othello");
 
             var hamletPerformance = new TragedyPerformance(hamletPlay, 55);
             var asLikePerformance = new ComedyPerformance(asLikePlay, 35);
