@@ -1,9 +1,9 @@
 ﻿using PerformanceBiller.Models;
 
-namespace PerformanceBiller.Infra
+namespace PerformanceBiller.Repositories
 {
     public interface IInvoiceRepository
     {
-        Invoice GetInvoice();
+        InvoiceData GetInvoiceData();
     }
 }

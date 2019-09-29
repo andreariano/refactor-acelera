@@ -1,7 +1,7 @@
 ﻿namespace PerformanceBiller.Models
 {
-    public class TragedyPlay : Play
+    public class TragedyPlay : IPlay
     {
-        public override string Name { get => "Tragedy"; }
+        public string Name { get => "Tragedy"; }
     }
 }

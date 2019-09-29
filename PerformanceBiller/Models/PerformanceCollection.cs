@@ -3,23 +3,28 @@ using System.Collections.Generic;
 
 namespace PerformanceBiller.Models
 {
-    public class PerformanceCollection: IEnumerable<Performace<Play>>
+    public class PerformanceCollection: IEnumerable<IPerformace<IPlay>>
     {
-        private IList<Performace<Play>> _performances;
+        private IList<IPerformace<IPlay>> _performances;
 
         public decimal PerformancesTotal { get; private set; }
 
         public PerformanceCollection()
         {
-            _performances = new List<Performace<Play>>();
+            _performances = new List<IPerformace<IPlay>>();
         }
 
-        public void AddPerformance(Performace<Play> performace)
+        public PerformanceCollection(IEnumerable<IPerformace<IPlay>> performaces)
+        {
+            _performances = new List<IPerformace<IPlay>>(performaces);
+        }
+
+        public void AddPerformance(IPerformace<IPlay> performace)
         {
             _performances.Add(performace);
         }
 
-        public IEnumerator<Performace<Play>> GetEnumerator()
+        public IEnumerator<IPerformace<IPlay>> GetEnumerator()
         {
             return _performances.GetEnumerator();
         }

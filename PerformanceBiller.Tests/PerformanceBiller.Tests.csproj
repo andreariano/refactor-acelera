@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PerformanceBiller.Infra\PerformanceBiller.Infra.csproj" />
     <ProjectReference Include="..\PerformanceBiller\PerformanceBiller.csproj" />
   </ItemGroup>
 

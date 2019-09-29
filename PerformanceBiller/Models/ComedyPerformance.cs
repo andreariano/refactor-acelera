@@ -4,31 +4,37 @@
     {
         private const int NumberOfAtendeesForExtraVolumeCredits = 5;
 
+        private const decimal FixedPricePerPerson = 300;
+
+        private const decimal FixedPriceAboveThreshold = 10000;
+
         protected override decimal FixedMinimumPrice => 30000;
 
-        protected override decimal PricePerPersonAboveThreshold => 10500;
+        protected override decimal PricePerPersonAboveThreshold => 500;
 
         protected override int AudienceThreshold => 20;
 
-        private decimal FixedPricePerPerson => 300;
 
         public ComedyPerformance(ComedyPlay play, int audience) : base(play, audience)
         {
         }
 
-        public override decimal CalculatePerformace()
+        protected override decimal CalculatePerformaceSpecific()
         {
-            return
-                FixedMinimumPrice +
-                PriceAboveAudienceThreshold() +
-                FixedPricePerPerson * Audience;
+            return FixedPricePerPerson * Audience;
         }
 
-        public override int CalculateVolumeCredits()
+        protected override int CalculatePerformanceSpecificVolumeCredits()
         {
-            return 
-                base.CalculateVolumeCredits() + 
-                Audience / NumberOfAtendeesForExtraVolumeCredits;
+            return Audience / NumberOfAtendeesForExtraVolumeCredits;
+        }
+
+        protected override decimal PriceAboveAudienceThreshold()
+        {
+            if (Audience <= AudienceThreshold)
+                return 0;
+
+            return (Audience - AudienceThreshold) * PricePerPersonAboveThreshold + FixedPriceAboveThreshold;
         }
     }
 }

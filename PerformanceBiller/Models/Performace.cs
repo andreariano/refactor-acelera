@@ -2,7 +2,7 @@
 
 namespace PerformanceBiller.Models
 {
-    public abstract class Performace<T> where T : Play
+    public abstract class Performace<T> : IPerformace<IPlay>
     {
         protected const int AudienceThresholdForVolumeCredit = 30;
 
@@ -22,19 +22,25 @@ namespace PerformanceBiller.Models
             Audience = audience;
         }
 
-        public abstract decimal CalculatePerformace();
+        protected abstract decimal PriceAboveAudienceThreshold();
 
-        protected decimal PriceAboveAudienceThreshold()
+        protected abstract int CalculatePerformanceSpecificVolumeCredits();
+
+        protected abstract decimal CalculatePerformaceSpecific();
+
+        public decimal CalculatePerformace()
         {
-            if (Audience <= AudienceThreshold)
-                return 0;
-
-            return (Audience - AudienceThreshold) * PricePerPersonAboveThreshold;
+            return
+                (FixedMinimumPrice +
+                PriceAboveAudienceThreshold() + 
+                CalculatePerformaceSpecific()) / 100;
         }
 
         public virtual int CalculateVolumeCredits()
         {
-            return Math.Max(Audience - AudienceThresholdForVolumeCredit, 0);
+            return 
+                Math.Max(Audience - AudienceThresholdForVolumeCredit, 0) + 
+                CalculatePerformanceSpecificVolumeCredits();
         }
     }
 }

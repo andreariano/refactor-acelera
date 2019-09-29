@@ -12,9 +12,22 @@
 
         protected override int AudienceThreshold => 30;
 
-        public override decimal CalculatePerformace()
+        protected override decimal CalculatePerformaceSpecific()
         {
-            return FixedMinimumPrice + PriceAboveAudienceThreshold();
+            return 0;
+        }
+
+        protected override int CalculatePerformanceSpecificVolumeCredits()
+        {
+            return 0;
+        }
+
+        protected override decimal PriceAboveAudienceThreshold()
+        {
+            if (Audience <= AudienceThreshold)
+                return 0;
+
+            return (Audience - AudienceThreshold) * PricePerPersonAboveThreshold;
         }
     }
 }
