@@ -6,8 +6,8 @@ namespace PerformanceBiller.Billing
 {
     public class PerformanceStatement
     {
-        private IInvoiceRepository _invoiceRepository;
-        private IInvoiceReporter _invoiceReporter;
+        private readonly IInvoiceRepository _invoiceRepository;
+        private readonly IInvoiceReporter _invoiceReporter;
 
         public PerformanceStatement(IInvoiceRepository invoiceRepository, IInvoiceReporter invoiceReporter)
         {
